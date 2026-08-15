@@ -27,6 +27,27 @@ async function loadCSV(url) {
   return parseCSV(await response.text());
 }
 
+function injectLiveStyles() {
+  const style = document.createElement('style');
+  style.textContent = `
+    .heart-live-grid{display:grid;grid-template-columns:320px 1fr;gap:28px;align-items:center;margin-top:24px}
+    .heart-donut-wrap{display:flex;align-items:center;gap:18px}
+    .heart-donut-wrap .donut{width:142px;height:142px;flex:0 0 auto}
+    .heart-donut-wrap .donut:after{width:92px;height:92px}
+    .legend.compact p{font-size:.82rem;margin-bottom:8px}
+    .clinical-bars{display:grid;gap:14px}
+    .live-metric-label{display:flex;justify-content:space-between;gap:20px;margin-bottom:7px;font-size:.82rem}
+    .live-metric-label span{color:#b7c7d9}.live-metric-label strong{color:#fff}
+    .live-track{height:9px;border-radius:999px;background:#172b42;overflow:hidden}
+    .live-track b{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#2f7df4,#7dd3fc)}
+    .live-track b.alt{background:linear-gradient(90deg,#5b8cff,#9cd7ff)}
+    code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#b6dcff;background:#10233a;padding:2px 5px;border-radius:6px}
+    @media(max-width:900px){.heart-live-grid{grid-template-columns:1fr}}
+    @media(max-width:600px){.heart-donut-wrap{flex-direction:column;align-items:flex-start}.live-metric-label{gap:12px}}
+  `;
+  document.head.appendChild(style);
+}
+
 function updateDiabetesCard(rows) {
   const positive = rows.filter(r => r.Outcome === '1');
   const negative = rows.filter(r => r.Outcome === '0');
@@ -46,8 +67,8 @@ function updateDiabetesCard(rows) {
     const donut = outcomeCard.querySelector('.donut');
     const donutValue = outcomeCard.querySelector('.donut strong');
     const legend = outcomeCard.querySelectorAll('.legend p');
-    if (badge) badge.textContent = `${rows.length.toLocaleString()} records`;
-    if (donut) donut.style.background = `conic-gradient(#4da3ff 0 ${positivePct}%, #1c324b ${positivePct}% 100%)`;
+    if (badge) badge.textContent = `${rows.length.toLocaleString()} records · live`;
+    if (donut) donut.style.background = `conic-gradient(#4da3ff 0 ${positivePct}%, #1c3856 ${positivePct}% 100%)`;
     if (donutValue) donutValue.textContent = pct(positivePct);
     if (legend[0]) legend[0].innerHTML = `<i class="dot positive"></i><strong>${positive.length}</strong> diabetes-positive records`;
     if (legend[1]) legend[1].innerHTML = `<i class="dot negative"></i><strong>${negative.length}</strong> diabetes-negative records`;
@@ -96,7 +117,7 @@ function createHeartCard(rows) {
     </div>
     <div class="heart-live-grid">
       <div class="heart-donut-wrap">
-        <div class="donut" style="background:conic-gradient(#7dd3fc 0 ${positivePct}%, #1c324b ${positivePct}% 100%)">
+        <div class="donut" style="background:conic-gradient(#7dd3fc 0 ${positivePct}%, #1c3856 ${positivePct}% 100%)">
           <div><strong>${pct(positivePct)}</strong><span>Heart disease</span></div>
         </div>
         <div class="legend compact">
@@ -113,7 +134,7 @@ function createHeartCard(rows) {
     </div>
     <p class="note">Generated directly from <code>heart_processed.csv</code> in the published GitHub repository. Descriptive only; not a diagnostic claim.</p>`;
 
-  const workflowCard = grid.querySelector('.insight-card.wide');
+  const workflowCard = Array.from(grid.querySelectorAll('.insight-card')).find(el => el.querySelector('.workflow'));
   if (workflowCard) grid.insertBefore(card, workflowCard);
   else grid.appendChild(card);
 }
@@ -124,6 +145,7 @@ function metricBar(label, value, max, display, extraClass = '') {
 }
 
 async function initProjectInsights() {
+  injectLiveStyles();
   try {
     const [diabetes, heart] = await Promise.all([
       loadCSV(DATASETS.diabetes),
