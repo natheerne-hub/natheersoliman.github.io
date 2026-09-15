@@ -1,14 +1,21 @@
-# Dr. Natheer Soliman — Portfolio Website
+# Dr. Natheer Soliman — Healthcare Data Portfolio
 
-Personal portfolio for **Dr. Natheer Soliman, MD**, focused on Healthcare Data Analytics, Clinical Data, and AI.
+Personal portfolio website for **Dr. Natheer Soliman, MD**, focused on Healthcare Data Analytics, Clinical Analytics, Health Informatics and responsible Healthcare AI.
 
-## Featured work
+## Current featured work
 
-- Diabetes Medical Data Analysis
-- Heart Disease Exploratory Data Analysis
-- Stroke Prediction Model
-- Hospital Readmissions Analysis — in progress
+- **Hospital Readmissions Healthcare Analytics** — CMS HRRP hospital-quality analysis with a published interactive dashboard and separate patient-level research workflow.
+- **Heart Disease Analysis & Risk Modeling** — reproducible cardiovascular EDA and leakage-aware baseline modeling.
+- **FHIR Clinical Data Pipeline** — synthetic FHIR/HL7 interoperability and clinical terminology demonstration.
+- **Diabetes Medical Data Analysis** — data-quality, EDA and statistical analysis with automated notebook verification.
+- **Stroke Prediction Model — Artifact Audit** — responsible model-artifact validation with unsupported performance claims intentionally withheld.
 
-## Deployment
+## Professional focus
 
-This repository is designed for GitHub Pages. Publish the `main` branch from the repository root in **Settings → Pages**.
+Healthcare Data Analytics · Clinical Data Analytics · Health Informatics · Public Health Data · Healthcare BI · Responsible Clinical AI
+
+## Links
+
+- [Live Portfolio](https://natheerne-hub.github.io/natheersoliman.github.io/)
+- [GitHub Profile](https://github.com/natheerne-hub)
+- [Kaggle](https://www.kaggle.com/nateer)
