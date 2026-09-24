@@ -1,6 +1,6 @@
-# Dr. Natheer Soliman — Healthcare Data Portfolio
+# Dr. Nather Yunis Suliaman — Healthcare Data Portfolio
 
-Personal portfolio website for **Dr. Natheer Soliman, MD**, focused on Healthcare Data Analytics, Clinical Analytics, Health Informatics and responsible Healthcare AI.
+Personal portfolio website for **Dr. Nather Yunis Suliaman, MD**, focused on Healthcare Data Analytics, Clinical Analytics, Health Informatics and responsible Healthcare AI.
 
 ## Current featured work
 
